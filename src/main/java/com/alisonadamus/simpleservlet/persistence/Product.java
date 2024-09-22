@@ -1,22 +1,24 @@
 package com.alisonadamus.simpleservlet.persistence;
 
+import java.math.BigDecimal;
+
 public class Product {
 
-    private int id;
+    private Long id;
     private String title;
-    private Double cost;
+    private BigDecimal cost;
 
-    public Product(int id, String title, Double cost) {
+    public Product(Long id, String title, BigDecimal cost) {
         this.id = id;
         this.title = title;
         this.cost = cost;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -28,11 +30,11 @@ public class Product {
         this.title = title;
     }
 
-    public Double getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 

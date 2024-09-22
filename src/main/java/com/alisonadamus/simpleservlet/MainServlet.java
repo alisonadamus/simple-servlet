@@ -2,6 +2,7 @@ package com.alisonadamus.simpleservlet;
 
 import com.alisonadamus.simpleservlet.persistence.Product;
 import com.alisonadamus.simpleservlet.persistence.ProductRepository;
+import com.alisonadamus.simpleservlet.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @WebServlet(urlPatterns = "/products")
 public class MainServlet extends HttpServlet {
@@ -17,10 +19,12 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() {
-        ProductRepository productRepository = (ProductRepository) getServletContext().getAttribute(
-            "productRepository");
-        List<Product> products = productRepository.getProducts();
+        var context  = new AnnotationConfigApplicationContext(AppConfig.class);
+        ProductService productService = context.getBean(ProductService.class);
+
+        List<Product> products = productService.getProductList();
         products.forEach(product -> productList += product + "\n");
+
     }
 
     @Override
